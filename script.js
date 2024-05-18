@@ -1790,8 +1790,7 @@ $.contextMenu({
             },
             "sep4": "---------",
             "forceSell": {
-                name: "Force Sell",
-                //icon: "fa-solid fa-money-bill",
+                name: fullItem && forceSellList.includes(fullItem.name) ? "Remove force sell" : "Add force sell",
             },
             "sep5": "---------",
             "swap": {
