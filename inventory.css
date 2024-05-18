@@ -1,0 +1,857 @@
+@font-face {
+  font-family: arcade;
+  src: url('images/arcade.TTF');
+}
+
+::-webkit-scrollbar {
+  width: 0.6vw;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.26vw gray;
+  border-radius: 0.6vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8f563b;
+  border-radius: 0.6vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d27d2c;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: white;
+  font-family: arcade;
+}
+
+#fullInventory {
+  position: absolute;
+  top: 50%;
+  left: 1%;
+  display: block;
+  cursor: url('images/cursor/default.png'), auto;
+}
+
+#selectedInventory {
+  margin-top: 1vw;
+  position: absolute;
+  top: 100%;
+  left: 1%;
+  display: block;
+}
+
+#craftInventory {
+  margin-top: 1vw;
+  position: absolute;
+  left: 11%;
+  top: 51%;
+  display: block;
+}
+
+#stashInventory {
+  margin-top: 1vw;
+  position: absolute;
+  left: 11%;
+  top: 48%;
+}
+
+#craftPreview {
+  position: absolute;
+  left: 16.5%;
+  top: 53%;
+  width: 5.6vw;
+  height: 5.6vw;
+  background-image: url('images/inventory_background/craftPreview.png');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5vw;
+}
+
+#craftImage {
+  position: absolute;
+  left: 18.3%;
+  top: 55%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+  z-index: 100;
+}
+
+#craftButton {
+  position: absolute;
+  left: 17.3%;
+  top: 59.3%;
+  width: 4.1vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/craftButton.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+  z-index: 100;
+}
+
+div {
+  font-family: arcade;
+}
+
+.item-amount {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  padding: 0.1vw 0.3vw;
+  font-size: 0.5vw;
+  text-align: left;
+  line-height: 0.5vw;
+  white-space: pre;
+}
+
+#statsBars {
+  position: absolute;
+  top: 6%;
+  left: 1%;
+  width: 10vw;
+  height: 4vw;
+  background-image: url('images/inventory_background/stats_bars_area.png');
+  background-size: cover;
+  text-align: center;
+  font-size: 0.5vw;
+  padding: 0.35vw;
+  box-sizing: border-box;
+}
+
+.statBar {
+  position: relative;
+  width: calc(100% - 1vw);
+  height: 30%;
+  margin: 5% auto;
+  border: 0.15vw solid #000000;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-family: 'Press Start 2P';
+  font-size: 1em;
+  overflow: hidden;
+  background-color: #808080;
+}
+
+.barFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#hpBar .barFill {
+  background-color: #FF4136;
+}
+
+#manaBar .barFill {
+  background-color: #0074D9;
+}
+
+.statBar>span {
+  position: relative;
+  z-index: 2;
+}
+
+#stats {
+  position: absolute;
+  top: 16%;
+  width: 10vw;
+  height: 4vw;
+  background-image: url('images/inventory_background/stats_area.png');
+  background-size: cover;
+  text-align: center;
+  font-size: 0.5vw;
+  padding-top: 0.35vw;
+  left: 1%;
+}
+
+#blessings {
+  position: absolute;
+  top: 40%;
+  left: 1%;
+  width: 10vw;
+  height: 4vw;
+  background-image: url('images/inventory_background/stats_area.png');
+  background-size: cover;
+  text-align: center;
+  font-size: 0.5vw;
+  padding-top: 0.35vw;
+}
+
+#blessBlessings {
+  position: absolute;
+  top: 40.3%;
+  left: 11%;
+}
+
+.blessButton {
+  background-image: url('images/inventory_background/upgrade.png');
+  background-size: cover;
+  width: 1vw;
+  height: 0.7vw;
+  margin-right: 0.26vw;
+  transition: border 0.3s ease-in-out;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+}
+
+.blessButton:hover {
+  border: 0.1vw solid green;
+}
+
+#mission {
+  position: absolute;
+  top: 25%;
+  width: 10vw;
+  height: 6.6vw;
+  background-image: url('images/inventory_background/text_area.png');
+  background-size: cover;
+  text-align: center;
+  font-size: 0.5vw;
+  padding-top: 0.5vw;
+  padding-left: 0.21vw;
+  padding-right: 0.21vw;
+  overflow-wrap: break-word;
+  overflow: auto;
+  left: 1%;
+  cursor: url('images/cursor/select.png') 10 0, auto;
+}
+
+#mission div {
+  cursor: url('images/cursor/select.png') 10 0, auto;
+}
+
+#missionText {
+  padding-top: 0.2vw;
+}
+
+#missionProgress {
+  padding-top: 0.4vw;
+}
+
+#heal {
+  position: absolute;
+  top: 95%;
+  left: 8.3%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/heal.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#hideInventory {
+  position: absolute;
+  top: 95%;
+  left: 4.6%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/toggle_vision.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#quit {
+  position: absolute;
+  top: 95%;
+  left: 1%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/quit.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#craft {
+  position: absolute;
+  top: 95%;
+  left: 12%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/craft.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#stash {
+  position: absolute;
+  top: 95%;
+  left: 16%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/stash.png');
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#settingsMenu {
+  margin-top: 1vw;
+  position: absolute;
+  left: 11%;
+  top: 48%;
+  width: 20vw;
+  height: 13.2vw;
+  background-image: url('images/inventory_background/text_area.png');
+  background-size: cover;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settingsTitle {
+  text-align: center;
+  font-size: 0.5vw;
+  padding-top: 1vw;
+  padding-left: 0.21vw;
+  padding-right: 0.21vw;
+  overflow-wrap: break-word;
+  overflow: auto;
+}
+
+#settingsMenu select {
+  width: 15vw;
+  font-size: 0.75vw;
+  font-family: arcade;
+  background-color: #808080;
+  border: 0.052vw solid black;
+  border-radius: 0.26vw;
+  margin-top: 1vw;
+  color: white;
+}
+
+#settingsMenu select option {
+  font-size: 1vw;
+}
+
+#settingsMenu select:hover {
+  background-color: #7E4C34;
+}
+
+#settingsForcesellRemove {
+  text-align: center;
+  font-family: arcade;
+  font-size: 0.5vw;
+  background-color: #808080;
+  border: 0.052vw solid black;
+  border-radius: 0.26vw;
+  margin-top: 1vw;
+  padding-top: 0.26vw;
+  margin-right: 0.1vw;
+  margin-left: 0.1vw;
+  color: white;
+}
+
+#settingsForcesellRemove:hover {
+  background-color: #7E4C34;
+}
+
+#settings {
+  position: absolute;
+  top: 95%;
+  left: 20%;
+  width: 2vw;
+  height: 2vw;
+  background-image: url('images/inventory_background/toggle_vision.png');
+  filter: grayscale(1);
+  background-size: cover;
+  display: block;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  font-size: 0.5vw;
+}
+
+#loggedOut {
+  position: absolute;
+  color: white;
+  top: 2%;
+  left: 1%;
+  width: 15vw;
+  font-size: 1vw;
+  background-color: #595652;
+  border-color: #8f563b;
+  border-style: solid;
+  text-align: center;
+}
+
+#disconnectedMessage {
+  position: absolute;
+  color: red;
+  top: 50%;
+  left: 20%;
+  z-index: 1000;
+  font-size: 3vw;
+  font-family: arcade;
+  text-align: center;
+  display: none;
+}
+
+#loggedOut {
+  position: absolute;
+  color: white;
+  top: 2%;
+  left: 1%;
+  width: 15vw;
+  font-size: 1vw;
+  background-color: #595652;
+  border-color: red;
+  border-style: solid;
+  text-align: center;
+}
+
+#share {
+  width: 5vw;
+  height: 2vw;
+  font-size: 0.5vw;
+  color: white;
+  background-color: red;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  margin-bottom: 0.26vw;
+  font-family: arcade;
+}
+
+.spawned-text {
+  font-size: 1vw;
+  font-family: arcade;
+  color: red;
+}
+
+a,
+a:link,
+a:visited {
+  color: #c00;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #ff5c19;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #6aff19;
+}
+
+input[type="range"] {
+  width: 20vw;
+}
+
+.inventory-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.inventory-cell {
+  width: 1.8vw;
+  height: 1.8vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('images/inventory_background/middle_middle.png');
+  color: white;
+  text-shadow:
+    -0.05vw -0.05vw 0 #000,
+    0.05vw -0.05vw 0 #000,
+    -0.05vw 0.05vw 0 #000,
+    0.05vw 0.05vw 0 #000;
+}
+
+.inventory-cell:first-child {
+  width: 1.9vw;
+  padding-left: 0.052vw;
+  background-image: url('images/inventory_background/middle_left.png');
+}
+
+.inventory-cell:last-child {
+  width: 1.9vw;
+  padding-right: 0.052vw;
+  background-image: url('images/inventory_background/middle_right.png');
+}
+
+.inventory-row:first-child .inventory-cell {
+  height: 1.9vw;
+  padding-top: 0.052vw;
+  background-image: url('images/inventory_background/top_middle.png');
+}
+
+.inventory-row:last-child .inventory-cell {
+  height: 1.9vw;
+  padding-bottom: 0.052vw;
+  background-image: url('images/inventory_background/bottom_middle.png');
+}
+
+.inventory-row:first-child .inventory-cell:first-child {
+  width: 1.9vw;
+  height: 1.9vw;
+  background-image: url('images/inventory_background/top_left.png');
+}
+
+.inventory-row:first-child .inventory-cell:last-child {
+  width: 1.9vw;
+  height: 1.9vw;
+  background-image: url('images/inventory_background/top_right.png');
+}
+
+.inventory-row:last-child .inventory-cell:first-child {
+  width: 1.9vw;
+  height: 1.9vw;
+  background-image: url('images/inventory_background/bottom_left.png');
+}
+
+.inventory-row:last-child .inventory-cell:last-child {
+  width: 1.9vw;
+  height: 1.9vw;
+  background-image: url('images/inventory_background/bottom_right.png');
+}
+
+.inventory-row:only-child .inventory-cell {
+  height: 2vw;
+}
+
+.inventory-row:only-child .inventory-cell:first-child {
+  width: 1.9vw;
+  height: 2vw;
+  background-position: -29.85vw -14.87vw;
+}
+
+.inventory-row:only-child .inventory-cell:last-child {
+  width: 1.9vw;
+  height: 2vw;
+  background-position: -33.8vw -14.87vw;
+}
+
+.inventory-row .inventory-cell:only-child {
+  width: 2vw;
+  background-position: -29.276vw -24.076vw;
+}
+
+.inventory-row:first-child .inventory-cell:only-child {
+  width: 2vw;
+  height: 1.9vw;
+  background-position: -29.276vw -22.048vw;
+}
+
+.inventory-row:last-child .inventory-cell:only-child {
+  width: 2vw;
+  height: 1.9vw;
+  background-position: -29.276vw -26vw;
+}
+
+.inventory-row:only-child .inventory-cell:only-child {
+  width: 2vw;
+  height: 2vw;
+  background-position: -1.56vw -14.976vw;
+}
+
+.inventory-item {
+  position: relative;
+  width: 1.7vw;
+  height: 1.7vw;
+  background-repeat: no-repeat;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center, center center;
+}
+
+.inventory-item-sortable-placeholder {
+  display: none;
+}
+
+.inventory-item.ui-sortable-helper,
+.inventory-item.ui-draggable-dragging {
+  opacity: 0.6;
+}
+
+#select-helmet {
+  background-image: url('images/inventory_background/top_left_helmet.png');
+}
+
+#select-plating {
+  background-image: url('images/inventory_background/top_middle_plating.png');
+}
+
+#select-fabric {
+  background-image: url('images/inventory_background/top_middle_cloth.png');
+}
+
+#select-chest {
+  background-image: url('images/inventory_background/top_middle_chest.png');
+}
+
+#select-pants {
+  background-image: url('images/inventory_background/top_middle_shoes.png');
+}
+
+#select-weapon {
+  background-image: url('images/inventory_background/top_middle_sword.png');
+}
+
+#select-fishingRod {
+  background-image: url('images/inventory_background/top_middle_fishing_rod.png');
+}
+
+#delete-item {
+  background-image: url('images/inventory_background/delete.png');
+}
+
+#remove-gem {
+  background-image: url('images/inventory_background/bottom_middle_gem_remove.png');
+}
+
+.context-menu-list.context-menu-root {
+  font-size: 0.5vw;
+  font-family: Arcade;
+}
+
+#context-menu-layer {
+  display: none !important;
+}
+
+.context-menu-list {
+  background: url('images/inventory_background/text_area.png') no-repeat !important;
+  background-size: 100% 100% !important;
+  background-position: center center !important;
+  border: 0px !important;
+  padding: 0.52vw 0px 0.52vw 0px !important;
+  z-index: 200 !important;
+}
+
+.context-menu-item.osrsubmenu > span:after {
+  content: "▶";
+  float: right;
+  margin-left: 0.52vw;
+  color: white;
+  text-shadow: -0.1vw 0 black, 0 0.1vw black, 0.1vw 0 black, 0 -0.1vw black;
+}
+
+.context-menu-item.osrsubmenu.context-menu-disabled > span:after {
+  color: #cccccc;
+  content: "";
+}
+
+.context-menu-item {
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  color: white !important;
+  text-shadow: -0.1vw 0 black, 0 0.1vw black, 0.1vw 0 black, 0 -0.1vw black;
+  background-color: transparent !important;
+}
+
+.context-menu-item.context-menu-input {
+  padding: 0.1vw 1.04vw;
+}
+
+.context-menu-item:hover:not(.context-menu-disabled) {
+  text-shadow: -0.1vw 0 black, 0 0.1vw black, 0.1vw 0 black, 0 -0.1vw black;
+  color: #C0C146 !important;
+}
+
+.context-menu-item.context-menu-disabled {
+  cursor: not-allowed !important;
+  color: #cccccc !important;
+  text-shadow: -0.052vw 0 black, 0 0.052vw black, 0.052vw 0 black, 0 -0.052vw black;
+}
+
+.context-menu-item.context-menu-not-selectable {
+  border-bottom: 0.052vw solid black;
+  margin-left: 0.36vw !important;
+  margin-right: 0.36vw !important;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+}
+
+.context-menu-icon.context-menu-icon--fa::before {
+  color: white !important;
+}
+
+.context-menu-icon::before {
+  color: white !important;
+}
+
+.item-image {
+  position: absolute;
+  top: 0.26vw;
+  right: 0.26vw;
+  width: 2.8vw;
+  height: 2.8vw;
+  background-size: cover;
+  border: 0.052vw solid #351100;
+  background-color: linear-gradient(145deg, #7A7875, #595652);
+  border-radius: 0.52vw;
+}
+
+.context-menu-item.context-menu-html.context-menu-not-selectable {
+  border-bottom: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.custom-amount-menu {
+  display: flex;
+}
+
+.custom-amount-menu label {
+  width: 7.28vw;
+  position: relative;
+}
+
+.custom-amount-menu input {
+  width: 4.94vw;
+  text-align: right;
+  height: 1.56vw;
+  line-height: 1.56vw;
+  font-size: 0.83vw;
+  font-family: arcade;
+  background-color: #808080;
+  border: 0.052vw solid black;
+  border-radius: 0.26vw;
+  margin-top: 0.26vw;
+  -moz-appearance: textfield;
+  color: white;
+}
+
+.custom-amount-menu input::-webkit-outer-spin-button,
+.custom-amount-menu input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.spin-buttons {
+  margin-top: 0.26vw;
+  width: 1vw;
+}
+
+.spin-button {
+  background: #7E4C34;
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+  color: white;
+  font-size: 0.52vw;
+}
+
+#customAmountInput {
+  text-align: center;
+  font-size: 0.55vw;
+  width: 3vw !important;
+  height: 1.5vw !important;
+}
+
+.spin-button:hover {
+  color: #C0C146;
+  text-shadow: -0.052vw 0 black, 0 0.052vw black, 0.052vw 0 black, 0 -0.052vw black;
+}
+
+.custom-amount-menu button {
+  cursor: url(images/cursor/point.png) 10 0, auto !important;
+}
+
+#customAmountSell {
+  background-color: #7E4C34;
+  color: white;
+  font-family: arcade;
+  font-size: 0.5vw;
+  width: 1.8vw;
+  height: 1.55vw;
+  position: absolute;
+  bottom: 0;
+  right: -0.5vw;
+}
+
+
+#customAmountSell:hover {
+  color: #C0C146;
+  text-shadow: -0.052vw 0 black, 0 0.052vw black, 0.052vw 0 black, 0 -0.052vw black;
+}
+
+.ui-tooltip {
+  background-color: #595652;
+  border: 0.42vw solid #ae6834;
+  border-radius: 0.52vw;
+  background-size: 100% 100% !important;
+  background-position: center center !important;
+  color: white;
+  width: 18.2vw;
+  padding: 0.26vw 3.33vw 0.26vw 0.52vw;
+  z-index: 101;
+}
+
+ui-tooltip::before,
+.ui-tooltip::after {
+  content: "";
+  position: absolute;
+  top: -0.1vw;
+  left: -0.1vw;
+  right: -0.1vw;
+  bottom: -0.1vw;
+  border-radius: 0.52vw;
+}
+
+.ui-tooltip::before {
+  border: 0.15vw solid black !important;
+  top: -0.42vw;
+  left: -0.42vw;
+  right: -0.42vw;
+  bottom: -0.42vw;
+}
+
+.ui-tooltip::after {
+  border: 0.15vw solid black;
+}
+
+.ui-tooltip-content {
+  font-size: 0.4vw;
+  font-family: arcade;
+  line-height: 0.7vw;
+  color: white;
+  text-shadow: -0.052vw 0 black, 0 0.052vw black, 0.052vw 0 black, 0 -0.052vw black;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+* {
+  cursor: url('images/cursor/default.png'), auto;
+}
